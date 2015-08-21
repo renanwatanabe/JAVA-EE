@@ -29,3 +29,6 @@ Este repositório tem como objetivo registrar todos os meus estudos para consegu
 **Feedback após a prova:** (PENDENTE)
 
 
+![Imagem da Certificacao](http://s28.postimg.org/sva77qszv/phpv1oh_Lo.jpg)
+
+![Imagem do livro](http://isuba.s8.com.br/produtos/01/00/item/6829/4/6829450G1.jpg)
