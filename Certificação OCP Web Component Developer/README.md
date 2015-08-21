@@ -1,7 +1,8 @@
 ###Certificação Java Web###
 
 Este repositório tem como objetivo registrar todos os meus estudos para conseguir essa certificação, da mesma maneira que irei utilizá-lo futuramente como referência, ele também poderá ser utilizado para novos desenvolvedores.
-First | oi
+
+Descrição | Respostas 
 --------- | ------------
 **Nome da certificação    :** | Oracle Certified Expert, Java EE 6 Web Component Developer
 
