@@ -8,7 +8,7 @@ Descrição | Respostas
 **Número do Exame** | 1Z0-899
 **Número de questões** | 57
 **Pontuação para Aprovação** | 64% (acertar 37 questões)
-**Duração ** | 140 minutos 
+**Duração** | 140 minutos 
 **Preço** | R$ 434,00
 **Início dos estudos** | 21/08/2015
 **Materiais de Estudo** | Use a Cabeça JSP & Servlets, Especificação Servlets 3.0
