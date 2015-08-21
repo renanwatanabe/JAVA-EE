@@ -5,16 +5,11 @@ Este repositório tem como objetivo registrar todos os meus estudos para consegu
 Descrição | Respostas 
 --------- | ------------
 **Nome da certificação    :** | Oracle Certified Expert, Java EE 6 Web Component Developer
-
-**Número do Exame         :** 1Z0-899
-
-**Número de questões      :** 57
-
-**Pontuação para Aprovação:** 64% (acertar 37 questões)
-
-**Duração                 :** 140 minutos 
-
-**Preço                   :** R$ 434,00
+**Número do Exame         :** | 1Z0-899
+**Número de questões      :** | 57
+**Pontuação para Aprovação:** | 64% (acertar 37 questões)
+**Duração                 :** | 140 minutos 
+**Preço                   :** | R$ 434,00
 
 **Início dos estudos :** 21/08/2015
 
