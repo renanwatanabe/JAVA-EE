@@ -124,3 +124,39 @@ Dinâmica -> a página não existe antes de ser feita a solicitação,ela será 
 Servlet para gerar a página dinâmica
 
 
+
+public class ServletImplementation extends HttpServlet{
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
+ 
+          String nameParamenter = request.getParamenter("parameterName");
+          BigDecimal valueParameter = request.getParamenter("valueMoney");
+            
+         RequestDispatcher rd = request.sendRedirect("/index.html");
+       
+        rd.forward(request,response);
+
+}
+
+Destacar diferenças entre o include,forward 
+
+Implementação a fundo do requestDispatcher.
+
+Container ->
+
+
+Vantagens do container 
+Gerenciamento de vida dos servlets - > Criação do servlet, execução do método init(), execução do service(doGet, doPost), execução do destroy();
+
+Gerencimento da vida dos servlets -> em vez de ser criado uma instancia, é gerado uma thread nova para cada servlet inicialmente, no final do ciclo de vida , a servlet é destruida(thread)
+
+-JSP - O container é o responsável por compilar todas as paginas JSPs em classe java ( servlet) , todas as classes compiladas podem ser vistas no diretorio do Tomcat ( Destacar diferenças entre o scriptlet,jstl, e a expression language)
+
+
+O container também é responsável pela segurança das servlet de acordo com  o deploymenter descriptor, lá são definidas as partes dos filtros( filter) , onde dcada solicitação deverá passar por servlet pré-estabelecidas.
+
+
+**CRIAR um plano de estudo onde todo esse ciclo de vida acontece ao nivel baixo de código*
+
+
+
