@@ -1,0 +1,179 @@
+Servlet
+Capitulo 4
+Função: 
+A função do Servlet é receber uma solicitação(request) do cliente e devolver uma resposta(response).
+
+Fluxo : 
+O container cria os objetos HttpServletRequest e HttpServletResponse, cria ou aloca uma thread para o servlet e chama o método service(request,response) do servlet.
+O método service vai decidir qual método utilzar doGet ou doPost, o servlet utiliza o objeto response para digitar a resposta para o cliente, que volta para o container.
+Quando o método service() termina, a thread morre ou retorna para uma pool de threads gerenciadas pelo Container.As referências dos objetos request e response perdem
+o escopo e viram para a coleta de lixo. E o cliente obtém a resposta final.
+
+Ciclo de vida da Servlet:
+O ciclo de vida do Servlet é simples : existe apenas um estado principal : inicializado,ou ele está sendo inicializado(rodando seu construtor ou o método init()),
+sendo destruído( rodando o destroy()) , ou simplesmente não existe.
+
+
+public class MeuServlet extends HttpServlet{
+	
+	public MeuServlet(){
+		System.out.println("Construtor");
+	}
+	
+	@Override
+	public void init(){
+		System.out.println("Init");
+	}
+	
+	@Override
+	public void service(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("Service");
+	}
+	
+	@Override
+	
+	public void destroy(){
+		System.out.println("destroy");
+	}
+	
+}
+
+
+Construtor
+Init
+Service
+Service
+Service
+Service
+Service
+
+O Container sobe limpo, ele só cria a instância da servlet quando ela é executada pela primeira vez( que nesse caso ele executa o construtor e o init),
+após isso, ele cria um thread separada e executa o service, cada requisição é uma thread separada executando o service.
+O inicializado é o método init acaba e a instância fica lá aberta pronta para  criar ou aloca a thread e executa o service.
+
+DEIXAR BEM CLARO
+Ouvir alguem dizer: Cada instância do servlet-> ERRADO, são threads, só existe uma instância do servlet.(Exceto SingleThreadModel)
+
+É uma thread por solicitação, e não por cliente.
+
+
+
+Servlet carregando e Inicializando
+Quando você inicializa o tom cat, ele procura pelos servlets declarados no web.xml,mas os servlet são apenas inicializados quando vc executa algo.
+
+História da Solicitação não-idempotente
+Uma mina compra algo, mas a resposta não volta no monitor, ai ela clica de novo e no final ela comprou o mesmo item 2 vezes.
+
+Ser idempotente é bom.Significa que você pode fazer a mesma coisa repetidamente, sem os indesejáveis efeitos colaterais.
+Idempotente -> página soh pra exibir e pronto (GET)
+Não-Idempotente -> persiste algo no banco. (POST)
+
+
+REQUEST:::
+estrutura de códigos :
+
+<HTML>
+  <input name="color"/>
+</HTML>
+
+no final do corpo do http request
+color=dark&body=heavy
+
+
+no servlet : 
+request.getParameter("color")
+
+
+caso você use check box
+<input type="checkbox" name="renan" value="coca"/>coca
+<input type="checkbox" name="renan" value="pepsi"/>pepsi
+No seu código, você usará o método getParameterValuesO que retoma um array:
+String one = request.getParameterValues("sizes") [O];
+String [] sizes = request.getParameterValues("sizes");
+Se você quiser ver tudo no array, só por diversão ou teste, pode usar:
+String [] sizes = request.getParameterValues("sizes");
+for(int x=O; x < sizes.length ; x++) {
+out.println(~<br>sizes: ~ + sizes[x);
+(Considere que "out" é um PrintWriter que você obteve da resposta)
+
+Métodos interessantes do httpservletrequest.
+
+Plataforma do cliente e a informação do browser : request.getHeader("User-Agent");
+
+Cookies associados a esta solicitação : request.getCookies();
+
+Sessão associada a este cliente : request.getSession();
+ Método Http da solicitação : request.getMethod();
+ Stream de dados da solicitação : request.getInputStream();
+
+
+
+ RESPONSE:
+A resposta é o que volta para o cliente.
+//Voltar uma página html
+//Voltar um JAR
+
+
+public void doGet(REQUES,response){
+	
+	response.setContentType("application/jar");
+
+	ServletContext ctx = getServletContext();
+	InputStream is = ctx.getResourceAsStream("/bookCode.jar");
+
+	int read = 0;
+	byte[] bytes = new byte[1024];
+
+	OutputStream os = response.getOutputStream();
+
+	while((read = is.read(bytes)) != -1){
+	   os.write(bytes,0, read);
+	}
+
+	os.flush();
+	os.close();
+}
+
+
+Onde fica o arquivo jar?Em outras palavras, onde o método getResourceAsStream procura para achar o arquivo
+
+Esse método getResoucerceasstream requer que inicie com "/", que representa a raiz da aplicação
+
+text/html
+application/pdj
+video/quicktime
+application/java
+image/jpeg
+application/jar
+appl ication/octet-stream
+application/x-zip
+
+Você tem duas opções de saída: caracteres ou bytes
+O ServletResponse oferece duas opções de streams para escolher : ServletOutputStream para bytes  ou PrintWriter para caracteres.
+
+
+PrintWriter:
+
+PrintWriter	 writer = response.getWriter();
+writer.println("um texto e html");
+
+Usado para exibir dados de texto para um stream de caracteres.
+
+
+OutputStream:
+
+ServletOutputStream out = response.getOutputStream();
+out.write(byteArray);
+
+Usado para qualquer coisa.
+
+OBSERVAÇÃO : 
+Repare que para escrever ServletOutputStream, você deve escrever write(), porém para PrintWriter é println()
+E não se esqueça que quando você der  response.get , eles perdem o primeiro nome ( getOutputStream e getWriter)
+
+Configurar Headers de resposta:
+response.setHeader("a","b");   ->sobrescreve
+response.addHeader("a","b");   -adiciona 
+response.setIntHeader("a","b");
+
+quando você usa o setContentType("text/html"), é a msm coisa que response.setHeader("content-type","text/html");
