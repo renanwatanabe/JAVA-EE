@@ -9,12 +9,12 @@
 <title>CRUD Servlet</title>
 <%
     List<WizardVO> listaWizards = (List<WizardVO>) request.getAttribute("listaWizards");
-
 %>
 </head>
 <body>
 <h3>Wizard CRUD</h3>
 
+<form action="telaPrincipalServlet">
 <table border="1">
 	<tr>
 	  <td>Nick :</td>
@@ -35,13 +35,13 @@
 	<tr>
 	   <td colspan="2" align="right">
 	      <input type="button" value="Clean"/>
-          <a href="telaPrincipalServlet?acao=buscar">Buscar</a>
-	   </td>
+          <input type="submit" value="Search"/>
+ 	   </td>
 	</tr>	
 </table>
+</form>
 <br/><br/>
 
-<!-- <input type="button" value="New"  /> -->
 <a href="telaPrincipalServlet?acao=novo">Novo</a>
 
 <table border="1" width="500px">
@@ -57,9 +57,9 @@
    <td><%=wizard.getLevel() %></td>
    <td><%=wizard.getGuild() %></td>
    <td>
-      <a href="telaPrincipalServlet?acao=editar">Visualizar</a>
-      <a href="">Editar</a>
-      <a href="">Excluir</a>
+      <a href="telaPrincipalServlet?acao=visualizar&id=<%=wizard.getId()%>">Visualizar</a>
+      <a href="telaPrincipalServlet?acao=editar&id=<%=wizard.getId()%>">Editar</a>
+      <a href="telaPrincipalServlet?acao=excluir&id=<%=wizard.getId()%>">Excluir</a>
    </td>
 </tr>
 <%} %>
