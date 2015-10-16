@@ -1,3 +1,5 @@
+http://www.caelum.com.br/apostila-java-web/spring-mvc/#11-16-exercicios-removendo-e-alterando-tarefas
+
 aopalliance-1.0
 
 commons-logging-1.2
