@@ -1,0 +1,17 @@
+
+
+
+
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         System.out.print(getServletConfig().getInitParameter("personagemConfig"));
+	}
+	
+	
+	  <servlet>
+     <servlet-name>renanservlet</servlet-name>
+     <servlet-class>mypackage.RenanServlet</servlet-class>
+     <init-param>
+        <param-name>personagemConfig</param-name>
+        <param-value>Nishino</param-value>
+     </init-param>
+  </servlet>
