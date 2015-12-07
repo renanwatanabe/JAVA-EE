@@ -1,4 +1,5 @@
 
+Voce não consegue chamar o servletConfig no construtor do servlet, é no init que ele é criado.init(ServletConfig config).
 
 
 
