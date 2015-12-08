@@ -1,0 +1,72 @@
+JSP
+
+Diretivas : page, include e taglib.
+<%@ page import="br.com.mypackage.*" %>  //Não tem ponto e vírgula.
+<%@ page import="br.com.mypackage.*,java.util.*" %>
+
+Os scriplets são código java normais, então sempre devem ter ponto e vírgula.
+<%    out.println(Counter.getCount());  %>
+
+Expressão
+<%= Counter.getCount() %> //Não tem ponto e vírgula.
+O código acima é a msm coisa que out.print(Counter.getCount());
+
+________________________________________________
+Todos os códigos do scriptlet e das expressões ficam em um método service.
+Isso significa que as variaveis declaradas em um scriplet são sempre locais.
+
+Nota:Se vc quiser ver o código gerado é :
+Tomcat/work/Catalina/Nomedoseuservidor/nomedasuaplicacaçao/org/apache/jsp.
+<body>
+<% int count=0; %>
+The page count is <%= count++ %>
+</body>
+
+É a mesma coisa que :
+
+métodoJSP(){
+out.write("<body>");
+int count = 0;
+out.write("The page count is");
+out.print(++count);
+out.write("</body>");
+}
+
+
+________________________________________________________________
+pra virar uma variavel global é
+<%! int count =0; %> //TEM PONTO E VIRGULA!
+ai sim fica fora do método jspservice, como atributo global.
+
+
+___________________________________________________
+<!-- comentário HTML --> 
+<%-- comentário JSP --%>
+__________________________________________________
+O container gera uma classe a partir do seu JSP, que implementa HttpJspPage
+
+jspInit(),jspDestroy(), _jspService().
+_____________________________________________________________
+Na primeira solicitação da JSP, éfeito um ciclo de vida de compilação,trasnformação,etc
+Depois é só criada threads,ou seja, apenas o primeiro cliente que faz essa brincadeira de overhead.
+
+_______________________________________________
+se vc quiser usar o servletconfig na jsp é só adicionar a pagina no web.xml
+<servlet>
+<servlet-name>etc...
+<jsp-file>/renan.jsp</jsp-file>
+
+<init-param>
+
+</servlet>
+
+________________________________________________
+nos servlet é getServletContext().getattribute, mas na jsp é application.getattribute.etc
+
+_____________________-
+Expression language
+${applicationScope.mail}  é a msm coisa que <%= application.getAttribute("mail") %>
+
+_______
+Se quiser desabilitar scriplets,el, ou declarações na jsp é só por
+pagina 321.

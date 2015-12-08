@@ -1,0 +1,25 @@
+Fucking detalhes:
+
+Contexto e usado por toda aplicação, caso tenha alterações use:
+
+synchronized(getServletContext()){
+   getServletContext().setAttribute("renan","valor");
+   (String)getServletContext().getAttribute("renan");
+}
+
+Os objetos da sessão são seguros contra threads?
+Na teoria sim, mas se o cliente abrir dois browsers, não.
+
+synchronized(request.getSession){
+  session.setAttribute("foo", "42");
+  (String)session.getAttribute("foo");
+}
+
+
+Entender o STM ( pagina 231 /202)
+
+response.encodeRedirectUrl("/renan.jsp");
+response.encodeUrl
+
+Entender HttpSessionbindinglistener pagina 284/254
+entender pagecontext.  pagina 341/313

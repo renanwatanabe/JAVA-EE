@@ -1,0 +1,28 @@
+As sessions são mantidas pelos Cookies, eles são enviados através de request e responses(JSSESSIONID=ABNNVDJNE).
+A melhor parte é que o container que cuida de tudo isso de set e get dos cookies.
+
+Quando você dá um HttpSession session = request.getSession();
+1-é criado um objeto Session.
+2-é gerada uma ID session exclusiva.
+3-é criado um novo objeto cookie
+4-o id session é associado ao cookie.
+5-é configurado o cookie na resposta header set-cookie.
+
+
+Você pode criar sessoes mesmo se o cliente desativar os cookies, mas da um pouco mais de trabalho:
+Use a reescrita da URL como segunda opção : URL+ ;jsessionid=1234567
+
+
+Maneiras de matar uma sessão:
+1-Por timeOut
+2-Chamando o session.invalidate()
+3-A aplicação cai.
+
+Configurar o timeout no DD tem quase o mesmo efeito que chamar o setMaxInactiveInterval()
+No dd são 15 minutos , no servlet são segundos.
+<session-config>
+   <session-timeout>15</session-timeout> 
+</session-config>
+
+Ou, especificar para uma sessão específica:
+session.setMaxInactiveInterval(20*60);  ->20 minutos

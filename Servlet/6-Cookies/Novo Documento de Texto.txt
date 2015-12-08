@@ -1,0 +1,20 @@
+Cookies
+Cookies são usados para manter o id da sessão.
+Cookie nada mais é do que um pequeno pedaço de dados(String nome/valor) trocado entre o cliente e o servidor.
+
+Por padrão, um cookie vive somente enquando dura uma sessão, uma vez que o cliente fecha o browser, o cookie desaparece.
+Dá pra mudar isso.
+
+
+Cookie cookie = new Cookie("username","renan");
+cookie.setMaxAge(30*60); // segundos = 30*60 = 30 minutos, se for -1, o cookie desaparece qnd o browser fecha.
+response.addCokie(cookie);
+
+//nao existe getCookie(String)..
+Cookie[] cookies = request.getCookies();
+
+for(int i = 0 ; i < cookies.length; i++){
+ if(cookie.getName().equals("username")){
+      cookie.getValue();
+}
+}

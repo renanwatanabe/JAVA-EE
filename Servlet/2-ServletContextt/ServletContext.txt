@@ -1,0 +1,18 @@
+
+O contexto voce pode usar para a aplicação inteira( inclusive em servlets e JSPS).
+
+
+  <context-param>
+     <param-name>personagemContexto</param-name>
+     <param-value>Asuna</param-value>
+  </context-param>
+
+		 System.out.println(getServletContext().getInitParameter("personagemContexto")); 
+		 System.out.println(getServletConfig().getServletContext().getInitParameter("personagemContexto"));
+
+<body>
+Olá!
+<% ServletContext context = getServletContext();
+   out.println(context.getInitParameter("personagemContexto"));
+%>
+</body>

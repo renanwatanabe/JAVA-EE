@@ -1,0 +1,18 @@
+O RequestDispatcher possui 2 métodos: include e forward.
+o forward é usado em 95% das das situações, você pode obter o RequestDispatcher por request ou context.
+
+ServletRequest:
+
+RequestDispatcher view = request.getRequestDispatcher("result.jsp");
+
+Se o caminho começar com "/", o container entende como iniciar a partir  da raiz desta aplicação.
+Se o caminho não iniciar com "/", ele é considerado como relativo à solicitação original.
+
+ServletContext:
+RequestDispatcher view = getServletContext().getRequestDispatcher("/result.jsp");
+
+Tem que ter "/" pro context, senão dá erro.
+
+
+O forward envia e já era
+o include envia, espera o retorno.

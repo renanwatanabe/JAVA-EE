@@ -1,0 +1,49 @@
+Pelo santo amor de deus, servletContext.getAttribute retorna um OBJETO, fazer o cast!
+Ver 211 PDF, pagina 183 pra entender o listenerbinding
+
+ <servlet>
+     <servlet-name>renanservlet</servlet-name>
+     <servlet-class>mypackage.RenanServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+     <servlet-name>renanservlet</servlet-name>
+     <url-pattern>/renan</url-pattern>
+  </servlet-mapping>
+  
+  <context-param>
+      <param-name>personagemContexto</param-name>
+      <param-value>Sinon</param-value>
+  </context-param>
+  
+  <listener>
+     <listener-class>
+          mypackage.AsunaContextListener
+     </listener-class>
+  </listener>
+
+
+
+
+public class AsunaContextListener implements ServletContextListener{
+
+	public void contextInitialized(ServletContextEvent event){
+		ServletContext meuContexto = event.getServletContext();
+		String nomePersonagem = meuContexto.getInitParameter("personagemContexto");
+		System.out.println(nomePersonagem);
+		meuContexto.setAttribute("personagemCarregado", nomePersonagem);
+	}
+	
+	public void contextDestroyed(ServletContextEvent event){
+		//não fazer nada aqui.
+	}
+}
+
+
+public class RenanServlet extends HttpServlet {
+
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nomePersonagem = (String)getServletContext().getAttribute("personagemCarregado");
+		System.out.println(nomePersonagem);
+	}
+}
