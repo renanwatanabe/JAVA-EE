@@ -1,0 +1,69 @@
+5- JSP
+
+
+
+Observacoes :
+
+Scriptlet : <%  %>  Tem ponto e virgula.
+Diretiva  : <%@ %>  Nao tem ponto e virgula
+Expressao : <%= %>  Nao tem ponto e virgula..
+
+
+1- Quais sao as diretivas?
+R: Page, include e taglib.
+
+<%@ page import="br.com.mypackage.*, br.renan.*"%>
+
+2- Exemplo de expressao:
+
+<% out.println(Contador.getContador());  %>
+<%= Contador.getContador() %>
+
+Se voce colocar ponto e virgula na expressao, e a mesma coisa que isso:
+<%= Contador.getContador(); %>
+<% out.print(Contador.getContador(););  
+
+Ou seja, NUNCA termine a expressao com ponto e virgula.
+Se voce invocar algum metodo com retorno void na expressao, vai lancar 
+org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+Alguns exemplos de expressoes que dao certo/errado :
+
+
+
+3-Exemplo de escopo de um scriptlet em uma JSP:
+
+<html>
+<body>
+<% int contador = 0; %>
+O contador de paginas eh: <%= ++contador %>
+</body>
+</html>
+
+
+Eh a mesma coisa que isso
+
+public void _jspService(HttpServletRequest request, HttpServletResponse) 
+                      throws java.io.Exception,ServletException{
+
+  PrintWriter out = response.getWriter();
+  response.setContentType("text/html");
+  out.write("<html><body>");
+  int contador = 0;
+  out.write("O contador de paginas eh:");
+  out.print(++contador);
+  out.write("</body></html>)	
+
+}
+
+Lugar onde esta o servlet gerado pela jsp :
+tomcat/work/CAtalina/nomedoseuservidor/nomedasuaaplicacao/org/apache/jsp
+
+Variaveis declaradas nos scriplets,serao sempre VARIAVEIS LOCAIS!!.
+
+Se voce quiser ter uma variavel de INSTANCIA, ai eh soh fazer isso
+<%! int contador = 0; %>
+Tudo que esta dentro com o <%! %> ,eh adicionado fora do metodo service do servlet gerado.
+
+
+pagina 295.
